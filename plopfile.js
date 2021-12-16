@@ -44,20 +44,20 @@ module.exports = plop => {
             },
             {
                 type: 'add',
-                path: 'packages/{{name}}/typings/sum-ui.d.ts',
-                templateFile: 'templates/typings/sum-ui.d.ts'
+                path: 'packages/{{name}}/typings/huskie-ui.d.ts',
+                templateFile: 'templates/typings/huskie-ui.d.ts'
             },
             {
                 type: 'append',
                 path: 'docs/.vuepress/clientAppEnhance.ts',
                 pattern: /(\/\/ -- APPSTART ITEMS HERE --)/gi,
-                template: "import Sum{{hump name}} from '@sum-ui/{{name}}'"
+                template: "import Huskie{{hump name}} from '@huskie-ui/{{name}}'"
             },
             {
                 type: 'append',
                 path: 'docs/.vuepress/clientAppEnhance.ts',
                 pattern: /(\/\/ -- APPEND ITEMS HERE --)/gi,
-                template: "app.component('Sum{{hump name}}', Sum{{hump name}})"
+                template: "app.component('Huskie{{hump name}}', huskie{{hump name}})"
             }
         ]
     })

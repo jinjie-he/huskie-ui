@@ -1,5 +1,5 @@
 {
-  "name": "sum-ui",
+  "name": "huskie-ui",
   "private": true,
   "version": "0.0.0",
   "workspaces": [
@@ -75,7 +75,7 @@
     "build": "yarn dist && NODE_ENV=production rollup -c",
     "build:watch": "rollup -c -w",
     "docs:dev": "vuepress dev docs",
-    "docs:build": "NODE_ENV=production vuepress build docs",
+    "docs:build": "set NODE_ENV=production && vuepress build docs",
     "clean": "lerna clean",
     "dist": "rm -rf ./packages/**/dist",
     "commit": "git-cz",
@@ -84,7 +84,8 @@
     "lint-fix": "eslint --fix ./packages --ext .vue,.js,.ts",
     "prettier": "prettier --write ./packages",
     "test": "jest --coverage",
-    "deploy": "yarn build && lerna publish"
+    "deploy": "yarn build && lerna publish",
+    "add": "plop"
   },
   "config": {
     "commitizen": {

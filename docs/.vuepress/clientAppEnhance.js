@@ -7,9 +7,10 @@ import 'element-plus/theme-chalk/src/index.scss'
 // -- APPSTART ITEMS HERE --
 import SumTable from '@sum-ui/table'
 import SumLayout from '@sum-ui/layout'
-
+import View from '@sum-ui/view'
 export default defineClientAppEnhance(({ app }) => {
   // -- APPEND ITEMS HERE --
 app.component('SumTable', SumTable)
 app.component('SumLayout', SumLayout)
+  app.component('View', View)
 })

@@ -1,4 +1,4 @@
-# sum-ui
+# huskie-ui
 
 vue3.0 UI
 

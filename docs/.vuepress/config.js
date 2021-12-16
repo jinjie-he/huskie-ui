@@ -2,9 +2,9 @@
 const alias = require('../../alias')
 
 module.exports = {
-  title: "sum-ui", // 顶部左侧标题
+  title: "huskie-ui", // 顶部左侧标题
   description: 'Vue3 + ElementPlus 组件库',
-  base: '/sum-ui/',
+  base: '/huskie-ui/',
   bundler: '@vuepress/vite',
   alias,
   head: [
@@ -30,7 +30,7 @@ module.exports = {
       (function() {
         var hm = document.createElement("script");
         hm.src = "https://hm.baidu.com/hm.js?09606fe130f768bfb1c3be82fdf56339";
-        var s = document.getElementsByTagName("script")[0]; 
+        var s = document.getElementsByTagName("script")[0];
         s.parentNode.insertBefore(hm, s);
       })();
         `
@@ -50,9 +50,10 @@ module.exports = {
         {
           text: "组件",
           children: [
-            
+
             { text: "Layout 布局", link: "/components/layout" },
-            { text: "Table 表格", link: "/components/table" }
+            { text: "Table 表格", link: "/components/table" },
+            { text: "View 试图", link: "/components/view" }
           ],
         },
       ],

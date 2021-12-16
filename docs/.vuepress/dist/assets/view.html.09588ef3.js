@@ -1,0 +1,1 @@
+const e={key:"v-1d0af3d8",path:"/components/view.html",title:"View",lang:"en-US",frontmatter:{title:"View",desc:"desc"},excerpt:"",headers:[{level:3,title:"@sum-ui/view",slug:"sum-ui-view",children:[]}],filePathRelative:"components/view.md",git:{updatedTime:null,contributors:[]}};export{e as data};

@@ -1,0 +1,1 @@
+import{r as a,o as e,c as s,b as r,F as i,a as u,d}from"./app.5dcc949c.js";const o={},c=u("h3",{id:"sum-ui-view",tabindex:"-1"},[u("a",{class:"header-anchor",href:"#sum-ui-view","aria-hidden":"true"},"#"),d(" @sum-ui/view")],-1);o.render=function(u,d){const o=a("demo");return e(),s(i,null,[c,r(o,{sourceCode:""})],64)};export{o as default};
