@@ -70,7 +70,7 @@
     "vuepress-vite": "^2.0.0-beta.25"
   },
   "license": "MIT",
-  "repository": "git@github.com:leitingting08/sum-ui.git",
+  "repository": "git@gitee.com:junjie826/huskie-ui.git",
   "scripts": {
     "build": "yarn dist && NODE_ENV=production rollup -c",
     "build:watch": "rollup -c -w",

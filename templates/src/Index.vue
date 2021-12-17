@@ -1,15 +1,9 @@
 <template>
-  <div class="sum-{{name}}">
-    
-  </div>
+    <div class="huskie-{{name}}"></div>
 </template>
 
-<script>
-import { defineComponent } from 'vue'
+<script lang="ts" setup>
+import { defineProps } from 'vue'
 
-export default defineComponent({
-  name: 'Sum{{hump name}}',
-  setup() {}
-})
+defineProps({})
 </script>
-

@@ -50,7 +50,6 @@ module.exports = {
         {
           text: "组件",
           children: [
-
             { text: "Layout 布局", link: "/components/layout" },
             { text: "Table 表格", link: "/components/table" },
             { text: "View 试图", link: "/components/view" }

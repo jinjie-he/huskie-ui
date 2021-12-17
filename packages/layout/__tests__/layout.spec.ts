@@ -1,9 +1,9 @@
 import { mount } from '@vue/test-utils'
-import SumLayout from '@sum-ui/layout'
+import HuskieLayout from '@huskie-ui/layout'
 
-describe('@sum-ui/layout', () => {
+describe('@huskie-ui/layout', () => {
     it('create', () => {
-        const wrapper = mount(SumLayout)
-        expect(wrapper.classes()).toContain('sum-layout')
+        const wrapper = mount(HuskieLayout)
+        expect(wrapper.classes()).toContain('huskie-layout')
     })
 })

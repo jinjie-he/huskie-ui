@@ -1,7 +1,7 @@
 const { readdirSync } = require('fs')
 const { join } = require('path')
 const chalk = require('chalk')
-const headPkgList = [] // 非 @sum-ui/开头的组件
+const headPkgList = [] // 非 @huskie-ui/开头的组件
 
 const pkgList = readdirSync(join(__dirname, './packages')).filter(
     pkg => pkg.charAt(0) !== '.' && !headPkgList.includes(pkg)

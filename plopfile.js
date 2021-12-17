@@ -57,7 +57,7 @@ module.exports = plop => {
                 type: 'append',
                 path: 'docs/.vuepress/clientAppEnhance.ts',
                 pattern: /(\/\/ -- APPEND ITEMS HERE --)/gi,
-                template: "app.component('Huskie{{hump name}}', huskie{{hump name}})"
+                template: "app.component('Huskie{{hump name}}', Huskie{{hump name}})"
             }
         ]
     })

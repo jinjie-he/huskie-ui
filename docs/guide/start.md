@@ -4,32 +4,31 @@ title: 开始
 ## 安装
 
 ```bash
-npm i @sum-ui/layout
+npm i @huskie-ui/layout
 # or
-yarn add @sum-ui/layout
+yarn add @huskie-ui/layout
 
-npm i @sum-ui/table
+npm i @huskie-ui/table
 # or
-yarn add @sum-ui/table
+yarn add @huskie-ui/table
 ```
 
 ## 使用
 
 ```vue
 <template>
- <sum-layout>
-   <sum-table/>
- </sum-layout>
+ <huskie-layout>
+ </huskie-layout>
 </template>
 
 <script lang="ts">
 import { defineComponent, toRefs } from 'vue'
-import SumLayout from '@sum-ui/layout'
-import SumTable from '@sum-ui/table'
+import HuskieLayout from '@huskie-ui/layout'
+
 
 export default defineComponent({
-  name: 'sum-layout',
-  components: { SumLayout, SumTable },
+  name: 'huskie-layout',
+  components: { HuskieLayout },
   setup() {}
 })
 </script>

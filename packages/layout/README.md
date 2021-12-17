@@ -1,31 +1,31 @@
-# @sum-ui/layout
+# @Huskie-ui/layout
 
 ## Install
 
 ```bash
-npm i @sum-ui/layout
+npm i @huskie-ui/layout
 # or
-yarn add @sum-ui/layout
+yarn add @huskie-ui/layout
 ```
 
 ## Usage
 
 ```vue
 <template>
-    <sum-layout />
+ <huskie-layout/>
 </template>
 
 <script lang="ts">
 import { defineComponent, toRefs } from 'vue'
-import SumLayout from '@sum-ui/layout'
+import HuskieLayout from '@huskie-ui/layout'
 
 export default defineComponent({
-    components: { SumLayout },
-    setup() {}
+  components: { HuskieLayout },
+  setup() {}
 })
 </script>
 ```
 
 ## Docs
 
-[@sum-ui/layout](https://leitingting08.github.io/sum-ui/components/layout.html)
+[@huskie-ui/layout](https://leitingting08.github.io/huskie-ui/components/layout.html)
