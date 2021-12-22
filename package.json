@@ -72,7 +72,7 @@
   "license": "MIT",
   "repository": "git@gitee.com:junjie826/huskie-ui.git",
   "scripts": {
-    "build": "yarn dist && NODE_ENV=production rollup -c",
+    "build": "yarn dist && set NODE_ENV=production rollup -c",
     "build:watch": "rollup -c -w",
     "docs:dev": "vuepress dev docs",
     "docs:build": "set NODE_ENV=production && vuepress build docs",

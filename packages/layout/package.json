@@ -6,7 +6,7 @@
   "module": "dist/index.module.js",
   "typings": "huskie-ui.d.ts",
   "typings": "typings/huskie-ui.d.ts",
-  "author": "ltt",
+  "author": "junjie",
   "files": [
       "dist",
       "typings",

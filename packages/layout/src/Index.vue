@@ -1,7 +1,15 @@
 <template>
     <div class="huskie-layout">
-        <ElButton>sdsds</ElButton>
+        <el-row :gutter="20">
+            <el-col :span="6"><div class="grid-content bg-purple">efse</div></el-col>
+            <el-col :span="6"><div class="grid-content bg-purple">sfsdf</div></el-col>
+            <el-col :span="6"><div class="grid-content bg-purple">sfsd</div></el-col>
+            <el-col :span="6"><div class="grid-content bg-purple">sfsd</div></el-col>
+        </el-row>
         我是测试代码
+        <el-radio v-model="radio" label="1">备选项</el-radio>
+        <el-radio v-model="radio" label="2">备选项</el-radio>
+        <el-button>sdsdd</el-button>
         <p :class="test.text">{{ formData.mobile }}</p>
         <p :class="test.word">{{ formData.account }}</p>
         <div v-html="content"></div>
@@ -9,7 +17,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ElButton } from 'element-plus'
+import { ElRow, ElCol, ElButton, ElRadio } from 'element-plus'
 import { defineProps, reactive, useCssModule, useAttrs, defineEmits } from 'vue'
 
 defineProps({

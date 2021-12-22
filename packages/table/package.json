@@ -1,5 +1,5 @@
 {
-  "name": "@huskie-ui/{{name}}",
+  "name": "@huskie-ui/table",
   "version": "1.0.0",
   "description": "基于 Vue3.x + ElementPlus 的组件库",
   "main": "dist/index.js",
@@ -37,5 +37,5 @@
   },
   "engines": {
     "node": ">=12"
-  },
+  }
 }
