@@ -6,7 +6,14 @@
                 :title="column.title"
                 :prop="column.dataIndex"
                 :key="index"
-            />
+            >
+                <template #default="{ row }">
+                    <slot v-if="column.sortName" :name="column.sortName" :row="row" />
+                    <span v-else>
+                        {{ column.formatter ? column.formatter(row) : row[column['dataIndex']] }}
+                    </span>
+                </template>
+            </el-table-column>
         </el-table>
     </div>
 </template>
@@ -19,6 +26,8 @@ interface Column {
     request?: () => Promise
     dataIndex: string
     search?: boolean
+    sortName: string
+    formatter?: (row) => any
 }
 const props = defineProps({
     dataSource: {
