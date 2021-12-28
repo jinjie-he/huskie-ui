@@ -1,17 +1,24 @@
 <template>
     <div class="huskie-table">
-        <el-table :data="_data.data.length > 0 ? _data.data : dataSource">
+        <el-button @click="onTest">test</el-button>
+        <el-table
+            ref="table"
+            :data="_data.dataSource.length > 0 ? _data.dataSource : dataSource"
+            v-bind="tableFields"
+            v-on="tableEvents"
+        >
             <el-table-column
                 v-for="(column, index) in columns"
-                :title="column.title"
+                :label="column.title"
                 :prop="column.dataIndex"
                 :key="index"
+                v-bind="column.columnFields || {}"
             >
-                <template #default="{ row }">
-                    <slot v-if="column.sortName" :name="column.sortName" :row="row" />
-                    <span v-else>
-                        {{ column.formatter ? column.formatter(row) : row[column['dataIndex']] }}
-                    </span>
+                <template v-if="column.headerSort" #header="scope">
+                    <slot :name="lowerToCapital(column.dataIndex)" :column="scope?.column" />
+                </template>
+                <template v-if="column.sortName" #default="{ row }">
+                    <slot :name="column.sortName" :row="row" />
                 </template>
             </el-table-column>
         </el-table>
@@ -19,16 +26,18 @@
 </template>
 
 <script lang="ts" setup>
-import { defineProps, onMounted, PropType, reactive } from 'vue'
-import { ElTable, ElTableColumn } from 'element-plus'
+import { defineProps, onMounted, PropType, reactive, defineExpose, ref, toRefs } from 'vue'
+import { ElTable, ElTableColumn, ElButton } from 'element-plus'
 interface Column {
     title?: string
     request?: () => Promise
     dataIndex: string
     search?: boolean
-    sortName: string
-    formatter?: (row) => any
+    headerSort?: boolean
+    sortName?: string
+    columnFields?: any
 }
+const table = ref<HTMLElement>(null)
 const props = defineProps({
     dataSource: {
         type: Array,
@@ -56,21 +65,55 @@ const props = defineProps({
         default: () => {
             return {}
         }
+    },
+    tableFields: {
+        type: Object,
+        default: () => {
+            return {}
+        }
+    },
+    tableEvents: {
+        type: Object,
+        default: () => {
+            return {}
+        }
     }
 })
 const _data = reactive<{
-    data: Array<never>
-}>({ data: [] })
+    dataSource: Array
+    total: number | string
+}>({ dataSource: [], total: 0 })
 onMounted(() => {
     getRequestData()
 })
 const getRequestData = async () => {
     try {
         const { data, total } = await props.request()
-        console.log(data, total, _data)
-        _data.data = data
+        console.log(data, total)
+        _data.dataSource = data
+        _data.total = total
     } catch (e) {
         console.log(e)
     }
 }
+const lowerToCapital = (dataIndex: string): string => {
+    return `header${dataIndex.toLowerCase().replace(/( |^)[a-z]/g, L => L.toUpperCase())}`
+}
+const onTest = () => {
+    console.log(table)
+}
+defineExpose({
+    tableRef: table
+})
 </script>
+<style lang="scss">
+.huskie-table {
+    table {
+        margin: 0;
+    }
+    th,
+    td {
+        border: none;
+    }
+}
+</style>
