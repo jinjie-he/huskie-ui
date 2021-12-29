@@ -30,7 +30,8 @@ desc: 'desc'
 <script lang='ts' setup>
 import {ref} from 'vue'
 const table = ref<HTMLElement>(null)
-const getTableData = () => {
+const getTableData = (params) => {
+    console.log(params)
   return new Promise(resolve => {
     resolve({
       data: [{
@@ -80,7 +81,6 @@ const columns = [{ columnFields: { type: 'selection', width: 55 } }, { title: '�
   dataIndex: 'age'
 }, { title: '性别', dataIndex: 'sex' }, { title: '操作', dataIndex: 'option', sortName: 'option', headerSort: true }]
 const tableFields = {
-  size: 'mini',
   border: true,
   rowClassName,
 }

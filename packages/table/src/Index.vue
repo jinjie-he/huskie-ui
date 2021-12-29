@@ -22,12 +22,23 @@
                 </template>
             </el-table-column>
         </el-table>
+        <el-pagination
+            :style="{ textAlign: paginationFields.align }"
+            class="huskie-table-pagination"
+            :current-page="_data.currentPage"
+            :page-size="_data.pageSize"
+            @size-change="handleSizeChange"
+            @current-change="handleCurrentChange"
+            :hide-on-single-page="_data.total <= 0"
+            :total="_data.total"
+            v-bind="_paginationFields"
+        />
     </div>
 </template>
 
 <script lang="ts" setup>
-import { defineProps, onMounted, PropType, reactive, defineExpose, ref, toRefs } from 'vue'
-import { ElTable, ElTableColumn, ElButton } from 'element-plus'
+import { defineProps, onMounted, PropType, reactive, defineExpose, ref, computed } from 'vue'
+import { ElTable, ElTableColumn, ElButton, ElPagination } from 'element-plus'
 interface Column {
     title?: string
     request?: () => Promise
@@ -49,7 +60,9 @@ const props = defineProps({
             return new Promise(resolve => {
                 resolve({
                     data: [],
-                    total: 0
+                    total: 0,
+                    currentPage: 1,
+                    pageSize: 10
                 })
             })
         }
@@ -77,27 +90,51 @@ const props = defineProps({
         default: () => {
             return {}
         }
+    },
+    paginationFields: {
+        type: Object,
+        default: () => {
+            return {
+                layout: 'total, sizes, prev, pager, next, jumper',
+                pageSizes: [10, 20, 30, 40, 50],
+                background: true,
+                align: 'center'
+            }
+        }
     }
+})
+const _paginationFields = computed(() => {
+    const { align, ...other } = props.paginationFields
+    return { ...other }
 })
 const _data = reactive<{
     dataSource: Array
     total: number | string
-}>({ dataSource: [], total: 0 })
+    currentPage: number
+    pageSize: number
+}>({ dataSource: [], total: 0, currentPage: 1, pageSize: 10 })
 onMounted(() => {
-    getRequestData()
+    getRequestData({ currentPage: 1, pageSize: 10 })
 })
-const getRequestData = async () => {
+const getRequestData = async params => {
     try {
-        const { data, total } = await props.request()
-        console.log(data, total)
+        const { data, total, currentPage, pageSize } = await props.request(params)
         _data.dataSource = data
-        _data.total = total
+        _data.total = total || data.length
+        _data.currentPage = currentPage || 1
+        _data.pageSize = pageSize || 10
     } catch (e) {
         console.log(e)
     }
 }
 const lowerToCapital = (dataIndex: string): string => {
     return `header${dataIndex.toLowerCase().replace(/( |^)[a-z]/g, L => L.toUpperCase())}`
+}
+const handleSizeChange = pageSize => {
+    getRequestData({ pageSize, currentPage: 1 })
+}
+const handleCurrentChange = currentPage => {
+    getRequestData({ pageSize: _data.pageSize, currentPage })
 }
 const onTest = () => {
     console.log(table)
@@ -115,5 +152,10 @@ defineExpose({
     td {
         border: none;
     }
+}
+</style>
+<style lang="scss" scoped>
+.huskie-table-pagination {
+    margin-top: 12px;
 }
 </style>
