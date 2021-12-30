@@ -1,9 +1,9 @@
 import { mount } from '@vue/test-utils'
-import HuskieTable from '@huskie-ui/table'
+import HTable from '@huskie-ui/table'
 
 describe('@huskie-ui/table', () => {
-  it('create', () => {
-    const wrapper = mount(HuskieTable)
-    expect(wrapper.classes()).toContain('huskie-table')
-  })
+    it('create', () => {
+        const wrapper = mount(HTable)
+        expect(wrapper.classes()).toContain('h-table')
+    })
 })

@@ -12,15 +12,15 @@ yarn add @huskie-ui/table
 
 ```vue
 <template>
- <huskie-table/>
+ <h-table/>
 </template>
 
 <script lang="ts">
 import { defineComponent, toRefs } from 'vue'
-import HuskieTable from '@huskie-ui/table'
+import HTable from '@huskie-ui/table'
 
 export default defineComponent({
-  components: { HuskieTable },
+  components: { HTable },
   setup() {}
 })
 </script>

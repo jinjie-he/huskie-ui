@@ -77,7 +77,7 @@
     "docs:dev": "vuepress dev docs",
     "docs:build": "set NODE_ENV=production && vuepress build docs",
     "clean": "lerna clean",
-    "dist": "rm -rf ./packages/**/dist",
+    "dist": "rimraf ./packages/**/dist",
     "commit": "git-cz",
     "release": "standard-version",
     "lint": "eslint ./packages --ext .vue,.js,.ts",

@@ -5,12 +5,14 @@
 import { defineClientAppEnhance } from '@vuepress/client'
 import 'element-plus/theme-chalk/src/index.scss'
 // -- APPSTART ITEMS HERE --
-import HuskieTable from '@huskie-ui/table'
-import HuskieLayout from '@huskie-ui/layout'
+import HQueryFilter from '@huskie-ui/queryFilter'
+import HTable from '@huskie-ui/table'
+import HLayout from '@huskie-ui/layout'
 
 export default defineClientAppEnhance(({ app }) => {
   // -- APPEND ITEMS HERE --
-app.component('HuskieTable', HuskieTable)
-app.component('HuskieLayout', HuskieLayout)
+app.component('HQueryFilter', HQueryFilter)
+app.component('HTable', HTable)
+app.component('HLayout', HLayout)
 
 })

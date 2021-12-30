@@ -1,5 +1,5 @@
 <template>
-    <div class="huskie-{{name}}"></div>
+    <div class="h-{{name}}"></div>
 </template>
 
 <script lang="ts" setup>

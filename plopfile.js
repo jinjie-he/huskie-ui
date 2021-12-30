@@ -51,13 +51,13 @@ module.exports = plop => {
                 type: 'append',
                 path: 'docs/.vuepress/clientAppEnhance.ts',
                 pattern: /(\/\/ -- APPSTART ITEMS HERE --)/gi,
-                template: "import Huskie{{hump name}} from '@huskie-ui/{{name}}'"
+                template: "import H{{hump name}} from '@huskie-ui/{{name}}'"
             },
             {
                 type: 'append',
                 path: 'docs/.vuepress/clientAppEnhance.ts',
                 pattern: /(\/\/ -- APPEND ITEMS HERE --)/gi,
-                template: "app.component('Huskie{{hump name}}', Huskie{{hump name}})"
+                template: "app.component('H{{hump name}}', H{{hump name}})"
             }
         ]
     })

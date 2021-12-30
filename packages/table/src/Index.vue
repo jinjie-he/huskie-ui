@@ -1,6 +1,19 @@
 <template>
-    <div class="huskie-table">
-        <el-button @click="onTest">test</el-button>
+    <div class="h-table">
+        <el-form :inline="true" :model="formSearch" size="mini" :label-width="100">
+            <el-form-item label="Approved by">
+                <el-input v-model="formSearch.user" placeholder="Approved by" style="width: 100%; min-width: 198px" />
+            </el-form-item>
+            <el-form-item label="Zone">
+                <el-select v-model="formSearch.region" placeholder="Activity zone" style="width: 100%">
+                    <el-option label="Zone one" value="shanghai"></el-option>
+                    <el-option label="Zone two" value="beijing"></el-option>
+                </el-select>
+            </el-form-item>
+            <el-form-item>
+                <el-button type="primary" @click="onTest">Query</el-button>
+            </el-form-item>
+        </el-form>
         <el-table
             ref="table"
             :data="_data.dataSource.length > 0 ? _data.dataSource : dataSource"
@@ -38,11 +51,22 @@
 
 <script lang="ts" setup>
 import { defineProps, onMounted, PropType, reactive, defineExpose, ref, computed } from 'vue'
-import { ElTable, ElTableColumn, ElButton, ElPagination } from 'element-plus'
+import {
+    ElTable,
+    ElTableColumn,
+    ElButton,
+    ElPagination,
+    ElForm,
+    ElFormItem,
+    ElInput,
+    ElSelect,
+    ElOption
+} from 'element-plus'
 interface Column {
     title?: string
     request?: () => Promise
-    dataIndex: string
+    dataIndex?: string
+    valueType?: string
     search?: boolean
     headerSort?: boolean
     sortName?: string
@@ -113,6 +137,7 @@ const _data = reactive<{
     currentPage: number
     pageSize: number
 }>({ dataSource: [], total: 0, currentPage: 1, pageSize: 10 })
+const formSearch = reactive({})
 onMounted(() => {
     getRequestData({ currentPage: 1, pageSize: 10 })
 })
@@ -137,14 +162,14 @@ const handleCurrentChange = currentPage => {
     getRequestData({ pageSize: _data.pageSize, currentPage })
 }
 const onTest = () => {
-    console.log(table)
+    console.log(formSearch)
 }
 defineExpose({
     tableRef: table
 })
 </script>
 <style lang="scss">
-.huskie-table {
+.h-table {
     table {
         margin: 0;
     }
@@ -152,10 +177,13 @@ defineExpose({
     td {
         border: none;
     }
+    .el-checkbox {
+        height: auto;
+    }
 }
 </style>
 <style lang="scss" scoped>
-.huskie-table-pagination {
+.h-table-pagination {
     margin-top: 12px;
 }
 </style>

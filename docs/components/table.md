@@ -10,7 +10,7 @@ desc: 'desc'
 ```vue
 
 <template>
-  <huskie-table
+  <h-table
     ref="table"
     :request='getTableData'
     :columns='columns'
@@ -25,7 +25,7 @@ desc: 'desc'
         <a  @click='onOption(row)'>添加</a>
       </div>
     </template>
-  </huskie-table>
+  </h-table>
 </template>
 <script lang='ts' setup>
 import {ref} from 'vue'
