@@ -1,9 +1,11 @@
 import { App } from 'vue'
-import Widget from './Index.vue'
+import { FormCol } from './Index'
 import 'element-plus/theme-chalk/src/base.scss'
 
-Widget.install = (app: App): void => {
-    app.component(Widget.name, Widget)
+FormCol.install = (app: App): void => {
+    app.component(FormCol.name, FormCol)
 }
 
-export default Widget
+export default {
+    FormCol
+}

@@ -1,4 +1,4 @@
-import { defineComponent, reactive, onMounted, defineProps } from 'vue'
+import { defineComponent, reactive, defineProps } from 'vue'
 import { ElCol, ElFormItem } from 'element-plus'
 export const FormCol = defineComponent({
     name: 'FormCol',

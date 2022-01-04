@@ -1,9 +1,12 @@
 <template>
     <div class="h-table">
         <el-form :inline="true" :model="formSearch" size="mini" :label-width="100">
-            <el-form-item label="Approved by">
+            <form-col label="Approved by">
                 <el-input v-model="formSearch.user" placeholder="Approved by" style="width: 100%; min-width: 198px" />
-            </el-form-item>
+            </form-col>
+            <!--            <el-form-item label="Approved by">-->
+            <!--                <el-input v-model="formSearch.user" placeholder="Approved by" style="width: 100%; min-width: 198px" />-->
+            <!--            </el-form-item>-->
             <el-form-item label="Zone">
                 <el-select v-model="formSearch.region" placeholder="Activity zone" style="width: 100%">
                     <el-option label="Zone one" value="shanghai"></el-option>
@@ -50,6 +53,7 @@
 </template>
 
 <script lang="ts" setup>
+import { FormCol } from '@huskie-ui/widget'
 import { defineProps, onMounted, PropType, reactive, defineExpose, ref, computed } from 'vue'
 import {
     ElTable,
@@ -64,7 +68,7 @@ import {
 } from 'element-plus'
 interface Column {
     title?: string
-    request?: () => Promise
+    request?: () => Promise<any>
     dataIndex?: string
     valueType?: string
     search?: boolean
