@@ -6,6 +6,4 @@ FormCol.install = (app: App): void => {
     app.component(FormCol.name, FormCol)
 }
 
-export default {
-    FormCol
-}
+export { FormCol }

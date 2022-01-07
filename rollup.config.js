@@ -3,6 +3,7 @@ import path from 'path'
 import json from '@rollup/plugin-json'
 import postcss from 'rollup-plugin-postcss'
 import vue from '@vitejs/plugin-vue'
+import vueJsx from '@vitejs/plugin-vue-jsx'
 import { terser } from 'rollup-plugin-terser'
 import { nodeResolve } from '@rollup/plugin-node-resolve'
 import typescript from '@rollup/plugin-typescript'
@@ -13,11 +14,11 @@ import { DEFAULT_EXTENSIONS } from '@babel/core'
 const isDev = process.env.NODE_ENV !== 'production'
 // packages 文件夹路径
 const root = path.resolve(__dirname, 'packages')
-
 // 公共插件配置
 const getPlugins = () => {
     return [
         vue(),
+        vueJsx({ enableObjectSlots: true }),
         typescript({
             tsconfig: './tsconfig.json'
         }),

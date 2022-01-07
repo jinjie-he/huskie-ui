@@ -6,6 +6,8 @@
     "moduleResolution": "node",
     "esModuleInterop": true,
     "jsx": "preserve",
+    "jsxFactory": "h",
+    "jsxFragmentFactory": "Fragment",
     "noLib": false,
     "target": "es5",
     "sourceMap": true,

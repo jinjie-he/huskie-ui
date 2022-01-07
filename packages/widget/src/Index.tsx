@@ -1,24 +1,25 @@
-import { defineComponent, reactive, defineProps } from 'vue'
+import { defineComponent, h } from 'vue'
 import { ElCol, ElFormItem } from 'element-plus'
 export const FormCol = defineComponent({
     name: 'FormCol',
-    setup({}, { slots }) {
-        const props = defineProps({
-            label: {
-                type: String,
-                default: ''
-            },
-            span: {
-                type: Number,
-                default: 6
-            }
-        })
+    props: {
+        label: {
+            type: String,
+            default: ''
+        },
+        span: {
+            type: Number,
+            default: 6
+        }
+    },
+    setup(props, { slots }) {
+        const _slots = {
+            label: () => <span>sdsd</span>,
+            default: () => slots.default?.()
+        }
         return () => (
             <ElCol span={props.span}>
-                <ElFormItem label={props.label}>
-                    {slots.default?.()}
-                    <span>dsdsds</span>
-                </ElFormItem>
+                <ElFormItem label={props.label}>{_slots}</ElFormItem>
             </ElCol>
         )
     }
