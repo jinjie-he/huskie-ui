@@ -14,7 +14,7 @@ export const FormCol = defineComponent({
     },
     setup(props, { slots }) {
         const _slots = {
-            label: () => <span>sdsd</span>,
+            label: () => (slots.label ? slots.label?.() : props.label),
             default: () => slots.default?.()
         }
         return () => (

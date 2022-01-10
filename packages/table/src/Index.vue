@@ -4,9 +4,6 @@
             <form-col label="Approved by">
                 <el-input v-model="formSearch.user" placeholder="Approved by" style="width: 100%; min-width: 198px" />
             </form-col>
-            <!--            <el-form-item label="Approved by">-->
-            <!--                <el-input v-model="formSearch.user" placeholder="Approved by" style="width: 100%; min-width: 198px" />-->
-            <!--            </el-form-item>-->
             <el-form-item label="Zone">
                 <el-select v-model="formSearch.region" placeholder="Activity zone" style="width: 100%">
                     <el-option label="Zone one" value="shanghai"></el-option>
