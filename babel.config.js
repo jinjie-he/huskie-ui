@@ -13,7 +13,7 @@ module.exports = {
             }
         ]
     ],
-    plugins: ['@babel/transform-runtime'],
+    plugins: ['@babel/transform-runtime', '@vue/babel-plugin-jsx'],
     env: {
         utils: {
             ignore: ['**/*.test.ts', '**/*.spec.ts'],

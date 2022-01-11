@@ -5,13 +5,14 @@
 import { defineClientAppEnhance } from '@vuepress/client'
 import 'element-plus/theme-chalk/src/index.scss'
 // -- APPSTART ITEMS HERE --
-import { FormCol } from '@huskie-ui/widget'
+import { FormCol,FormInput } from '@huskie-ui/widget'
 import HQueryFilter from '@huskie-ui/queryFilter'
 import HTable from '@huskie-ui/table'
 import HLayout from '@huskie-ui/layout'
 
 export default defineClientAppEnhance(({ app }) => {
   // -- APPEND ITEMS HERE --
+  app.component('FormInput', FormInput)
 app.component('FormCol', FormCol)
 app.component('HQueryFilter', HQueryFilter)
 app.component('HTable', HTable)

@@ -1,9 +1,13 @@
 <template>
     <div class="h-table">
         <el-form :inline="true" :model="formSearch" size="mini" :label-width="100">
-            <form-col label="Approved by">
-                <el-input v-model="formSearch.user" placeholder="Approved by" style="width: 100%; min-width: 198px" />
-            </form-col>
+            <FormInput label="Approved by" v-model="formSearch.user" placeholder="Activity zone" />
+            <!--            <form-col label="label">-->
+            <!--                <el-select v-model="formSearch.region" placeholder="Activity zone" style="width: 100%">-->
+            <!--                    <el-option label="Zone one" value="shanghai"></el-option>-->
+            <!--                    <el-option label="Zone two" value="beijing"></el-option>-->
+            <!--                </el-select>-->
+            <!--            </form-col>-->
             <el-form-item label="Zone">
                 <el-select v-model="formSearch.region" placeholder="Activity zone" style="width: 100%">
                     <el-option label="Zone one" value="shanghai"></el-option>
@@ -50,7 +54,7 @@
 </template>
 
 <script lang="ts" setup>
-import { FormCol } from '@huskie-ui/widget'
+import { FormCol, FormInput } from '@huskie-ui/widget'
 import { defineProps, onMounted, PropType, reactive, defineExpose, ref, computed } from 'vue'
 import {
     ElTable,
@@ -138,7 +142,7 @@ const _data = reactive<{
     currentPage: number
     pageSize: number
 }>({ dataSource: [], total: 0, currentPage: 1, pageSize: 10 })
-const formSearch = reactive({})
+const formSearch = reactive({ user: '1111' })
 onMounted(() => {
     getRequestData({ currentPage: 1, pageSize: 10 })
 })
