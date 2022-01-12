@@ -1,5 +1,5 @@
-import { defineComponent, h, computed } from 'vue'
-import { ElCol, ElFormItem, ElInput } from 'element-plus'
+import { defineComponent, h } from 'vue'
+import { ElCol, ElFormItem, ElInput, ElSelect } from 'element-plus'
 export const FormCol = defineComponent({
     name: 'FormCol',
     props: {
@@ -40,20 +40,53 @@ export const FormInput = defineComponent({
     },
     emits: ['update:modelValue'],
     setup(props, { slots, emit, attrs }) {
-        const _value = computed({
-            get() {
-                return props.modelValue
-            },
-            set(newValue) {
-                console.log(newValue)
-                emit('update:modelValue', newValue)
-            }
-        })
-        console.log(attrs, _value.value)
         const _slots = {
             label: () => (slots.label ? slots.label?.() : props.label),
-            default: () => <ElInput v-model={_value.value} {...attrs} />
+            default: () => (
+                <ElInput modelValue={props.modelValue} {...attrs} onInput={value => emit('update:modelValue', value)} />
+            )
         }
-        return () => h(<FormCol>{_slots}</FormCol>)
+        return () => <FormCol>{_slots}</FormCol>
+    }
+})
+export const FormSelect = defineComponent({
+    name: 'FormSelect',
+    props: {
+        label: {
+            type: String,
+            default: ''
+        },
+        span: {
+            type: Number,
+            default: 6
+        },
+        modelValue: {
+            type: String,
+            default: ''
+        },
+        request: {
+            type: Function,
+            default: () => {
+                return new Promise(resolve => {
+                    resolve({
+                        data: []
+                    })
+                })
+            }
+        }
+    },
+    emits: ['update:modelValue'],
+    setup(props, { slots, emit, attrs }) {
+        const _slots = {
+            label: () => (slots.label ? slots.label?.() : props.label),
+            default: () => (
+                <ElSelect
+                    modelValue={props.modelValue}
+                    {...attrs}
+                    onChange={value => emit('update:modelValue', value)}
+                />
+            )
+        }
+        return () => <FormCol>{_slots}</FormCol>
     }
 })

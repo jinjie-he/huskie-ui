@@ -2,12 +2,6 @@
     <div class="h-table">
         <el-form :inline="true" :model="formSearch" size="mini" :label-width="100">
             <FormInput label="Approved by" v-model="formSearch.user" placeholder="Activity zone" />
-            <!--            <form-col label="label">-->
-            <!--                <el-select v-model="formSearch.region" placeholder="Activity zone" style="width: 100%">-->
-            <!--                    <el-option label="Zone one" value="shanghai"></el-option>-->
-            <!--                    <el-option label="Zone two" value="beijing"></el-option>-->
-            <!--                </el-select>-->
-            <!--            </form-col>-->
             <el-form-item label="Zone">
                 <el-select v-model="formSearch.region" placeholder="Activity zone" style="width: 100%">
                     <el-option label="Zone one" value="shanghai"></el-option>

@@ -18,7 +18,7 @@ const root = path.resolve(__dirname, 'packages')
 const getPlugins = () => {
     return [
         vue(),
-        vueJsx({ enableObjectSlots: true }),
+        vueJsx({ transformOn: true, optimize: true }),
         typescript({
             tsconfig: './tsconfig.json'
         }),
