@@ -1,7 +1,7 @@
 import { App } from 'vue'
-import { FormCol, FormInput } from './Index'
+import { FormCol, FormInput, FormSelect } from './Index'
 import 'element-plus/theme-chalk/src/base.scss'
-const widgets = { FormCol, FormInput }
+const widgets = { FormCol, FormInput, FormSelect }
 for (const widgetsKey in widgets) {
     widgets[widgetsKey].install = (app: App): void => {
         app.component(widgets[widgetsKey].name, widgets[widgetsKey])
@@ -11,4 +11,4 @@ for (const widgetsKey in widgets) {
 //     app.component(FormCol.name, FormCol)
 // }
 
-export { FormCol, FormInput }
+export { FormCol, FormInput, FormSelect }

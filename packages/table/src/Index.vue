@@ -1,17 +1,6 @@
 <template>
     <div class="h-table">
-        <el-form :inline="true" :model="formSearch" size="mini" :label-width="100">
-            <FormInput label="Approved by" v-model="formSearch.user" placeholder="Activity zone" />
-            <el-form-item label="Zone">
-                <el-select v-model="formSearch.region" placeholder="Activity zone" style="width: 100%">
-                    <el-option label="Zone one" value="shanghai"></el-option>
-                    <el-option label="Zone two" value="beijing"></el-option>
-                </el-select>
-            </el-form-item>
-            <el-form-item>
-                <el-button type="primary" @click="onTest">Query</el-button>
-            </el-form-item>
-        </el-form>
+        <h-query-filter :columns="columns" />
         <el-table
             ref="table"
             :data="_data.dataSource.length > 0 ? _data.dataSource : dataSource"
@@ -35,7 +24,7 @@
         </el-table>
         <el-pagination
             :style="{ textAlign: paginationFields.align }"
-            class="huskie-table-pagination"
+            class="h-table-pagination"
             :current-page="_data.currentPage"
             :page-size="_data.pageSize"
             @size-change="handleSizeChange"
@@ -48,19 +37,9 @@
 </template>
 
 <script lang="ts" setup>
-import { FormCol, FormInput } from '@huskie-ui/widget'
+import HQueryFilter from '@huskie-ui/queryFilter'
 import { defineProps, onMounted, PropType, reactive, defineExpose, ref, computed } from 'vue'
-import {
-    ElTable,
-    ElTableColumn,
-    ElButton,
-    ElPagination,
-    ElForm,
-    ElFormItem,
-    ElInput,
-    ElSelect,
-    ElOption
-} from 'element-plus'
+import { ElTable, ElTableColumn, ElButton, ElPagination, ElForm, ElFormItem } from 'element-plus'
 interface Column {
     title?: string
     request?: () => Promise<any>
@@ -98,9 +77,7 @@ const props = defineProps({
     },
     columns: {
         type: Array as PropType<Array<Column>>,
-        default: () => {
-            return {}
-        }
+        default: () => []
     },
     tableFields: {
         type: Object,
@@ -136,7 +113,7 @@ const _data = reactive<{
     currentPage: number
     pageSize: number
 }>({ dataSource: [], total: 0, currentPage: 1, pageSize: 10 })
-const formSearch = reactive({ user: '1111' })
+const formSearch = reactive({})
 onMounted(() => {
     getRequestData({ currentPage: 1, pageSize: 10 })
 })
@@ -160,6 +137,7 @@ const handleSizeChange = pageSize => {
 const handleCurrentChange = currentPage => {
     getRequestData({ pageSize: _data.pageSize, currentPage })
 }
+
 const onTest = () => {
     console.log(formSearch)
 }
