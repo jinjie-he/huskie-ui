@@ -2,16 +2,25 @@
     <el-form class="qf" :model="formSearch" size="mini" :label-width="100">
         <el-row>
             <!-- eslint-disable-next-line vue/require-component-is -->
-            <component is="FormInput" label="Ass sd" v-model="formSearch.user" placeholder="Activity zone" />
-            <form-input label="Ass sd" v-model="formSearch.user" placeholder="Activity zone" />
-            <form-select label="Zone one" v-model="formSearch.test" placeholder="Activity test" :request="getRequest" />
-            <form-col label=""> sdsdsd </form-col>
+            <component
+                v-for="column in searchColumn"
+                :key="column.dataIndex"
+                :is="column.valueType"
+                :label="column.title"
+                v-model="formSearch[column.dataIndex]"
+                :placeholder="column.title"
+                :dataSource="column?.options ? column.options : []"
+                :request="column?.request ? column.request : null"
+                v-bind="column.fieldProps"
+            />
+            <slot v-if="customSubmitBtn" name="customSubmitBtn" :formSearch="formSearch" />
+            <form-col v-else label=""> sdsdsd </form-col>
         </el-row>
     </el-form>
 </template>
 
 <script lang="ts" setup>
-import { defineProps, PropType, reactive } from 'vue'
+import { defineProps, PropType, reactive, computed } from 'vue'
 import { FormInput, FormSelect, FormCol } from '@huskie-ui/widget'
 import { ElForm, ElRow } from 'element-plus'
 interface Column {
@@ -20,27 +29,35 @@ interface Column {
     dataIndex?: string
     valueType?: string
     search?: boolean
-    headerSort?: boolean
-    sortName?: string
     fieldProps?: any
+    options?: Array<any>
 }
 const formSearch = reactive({})
-defineProps({
+const props = defineProps({
     columns: {
         type: Array as PropType<Array<Column>>,
         default: () => []
+    },
+    customSubmitBtn: {
+        type: Boolean,
+        default: false
     }
 })
-const getRequest = async () => {
-    return {
-        data: [
-            { label: '全部', value: 'all' },
-            { label: '未解决', value: 'open' },
-            { label: '已解决', value: 'closed' },
-            { label: '解决中', value: 'processing' }
-        ]
+const lowerToCapital = (valueType: string): string => {
+    if (valueType) {
+        return `Form${valueType.toLowerCase().replace(/( |^)[a-z]/g, L => L.toUpperCase())}`
+    } else {
+        return 'FormInput'
     }
 }
+const searchColumn = computed(() => {
+    return props.columns
+        .filter(i => i.search)
+        .map(column => {
+            const valueType = lowerToCapital(column?.valueType)
+            return { ...column, valueType }
+        })
+})
 </script>
 <style lang="scss" scoped>
 .qf {

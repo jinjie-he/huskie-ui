@@ -31,7 +31,6 @@ desc: 'desc'
 import {ref} from 'vue'
 const table = ref<HTMLElement>(null)
 const getTableData = (params) => {
-    console.log(params)
   return new Promise(resolve => {
     resolve({
       data: [{
@@ -76,10 +75,20 @@ const getTable = () =>{
 const selectionChange = (val) => {
   console.log([...val])
 }
-const columns = [{ columnFields: { type: 'selection', width: 55 } }, { title: '姓名', dataIndex: 'name' }, {
+const getRequest = async () => {
+  return {
+    data: [
+      { label: '全部', value: 'all' },
+      { label: '未解决', value: 'open' },
+      { label: '已解决', value: 'closed' },
+      { label: '解决中', value: 'processing' }
+    ]
+  }
+}
+const columns = [{ columnFields: { type: 'selection', width: 55 } }, { title: '姓名', dataIndex: 'name' ,search:true,valueType:'select',request:getRequest}, {
   title: '年龄',
   dataIndex: 'age'
-}, { title: '性别', dataIndex: 'sex' }, { title: '操作', dataIndex: 'option', sortName: 'option', headerSort: true }]
+}, { title: '性别', dataIndex: 'sex',search:true}, { title: '操作', dataIndex: 'option', sortName: 'option', headerSort: true }]
 const tableFields = {
   border: true,
   rowClassName,

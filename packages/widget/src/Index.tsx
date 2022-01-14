@@ -87,14 +87,18 @@ export const FormSelect = defineComponent({
         }>({
             dataSource: []
         })
-        onMounted(async () => {
+        onMounted(() => {
+            getRequest()
+        })
+        const getRequest = async () => {
+            if (!props.request) return
             try {
                 const { data = [] } = await props.request()
                 _data.dataSource = data
             } catch (e) {
                 console.log(e)
             }
-        })
+        }
         const _slots = {
             label: () => (slots.label ? slots.label?.() : props.label),
             default: () => (

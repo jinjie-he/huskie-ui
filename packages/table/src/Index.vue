@@ -1,6 +1,10 @@
 <template>
     <div class="h-table">
-        <h-query-filter :columns="columns" />
+        <h-query-filter :columns="columns">
+            <template #customSubmitBtn="{ formSearch }">
+                <slot name="customSubmitBtn" :formSearch="formSearch" />
+            </template>
+        </h-query-filter>
         <el-table
             ref="table"
             :data="_data.dataSource.length > 0 ? _data.dataSource : dataSource"
@@ -49,6 +53,7 @@ interface Column {
     headerSort?: boolean
     sortName?: string
     columnFields?: any
+    options?: Array<any>
 }
 const table = ref<HTMLElement>(null)
 const props = defineProps({
