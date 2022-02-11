@@ -1,7 +1,6 @@
 <template>
-    <el-form class="qf" :model="formSearch" size="mini" :label-width="100">
+    <el-form class="qf" :model="formSearch" :size="size" :label-width="100">
         <el-row>
-            <!-- eslint-disable-next-line vue/require-component-is -->
             <component
                 v-for="column in searchColumn"
                 :key="column.dataIndex"
@@ -14,7 +13,10 @@
                 v-bind="column.fieldProps"
             />
             <slot v-if="customSubmitBtn" name="customSubmitBtn" :formSearch="formSearch" />
-            <form-col v-else label=""> sdsdsd </form-col>
+            <el-col v-else :span="6">
+                <el-button>重置</el-button>
+                <el-button type="primary">查询</el-button>
+            </el-col>
         </el-row>
     </el-form>
 </template>
@@ -22,7 +24,7 @@
 <script lang="ts" setup>
 import { defineProps, PropType, reactive, computed } from 'vue'
 import { FormInput, FormSelect, FormCol } from '@huskie-ui/widget'
-import { ElForm, ElRow } from 'element-plus'
+import { ElForm, ElRow, ElButton, ElCol } from 'element-plus'
 interface Column {
     title?: string
     request?: () => Promise<any>
@@ -41,6 +43,10 @@ const props = defineProps({
     customSubmitBtn: {
         type: Boolean,
         default: false
+    },
+    size: {
+        type: String,
+        default: 'default'
     }
 })
 const lowerToCapital = (valueType: string): string => {

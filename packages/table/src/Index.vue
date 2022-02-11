@@ -1,6 +1,6 @@
 <template>
     <div class="h-table">
-        <h-query-filter :columns="columns">
+        <h-query-filter :columns="columns" :size="tableFields?.size ? tableFields.size : 'default'">
             <template #customSubmitBtn="{ formSearch }">
                 <slot name="customSubmitBtn" :formSearch="formSearch" />
             </template>
@@ -53,6 +53,7 @@ interface Column {
     headerSort?: boolean
     sortName?: string
     columnFields?: any
+    fieldProps?: any
     options?: Array<any>
 }
 const table = ref<HTMLElement>(null)

@@ -85,10 +85,11 @@ const getRequest = async () => {
     ]
   }
 }
-const columns = [{ columnFields: { type: 'selection', width: 55 } }, { title: '姓名', dataIndex: 'name' ,search:true,valueType:'select',request:getRequest}, {
-  title: '年龄',
-  dataIndex: 'age'
-}, { title: '性别', dataIndex: 'sex',search:true}, { title: '操作', dataIndex: 'option', sortName: 'option', headerSort: true }]
+const columns = [
+    { columnFields: { type: 'selection', width: 55 } },
+    { title: '姓名', dataIndex: 'name' ,search:true,valueType:'select',request:getRequest,fieldProps:{placeholder:'我是测试数据'}},
+    { title: '年龄', dataIndex: 'age' }, { title: '性别', dataIndex: 'sex',search:true},
+    { title: '操作', dataIndex: 'option', sortName: 'option', headerSort: true }]
 const tableFields = {
   border: true,
   rowClassName,
