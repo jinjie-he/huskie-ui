@@ -31,6 +31,7 @@ desc: 'desc'
 import {ref} from 'vue'
 const table = ref<HTMLElement>(null)
 const getTableData = (params) => {
+    console.log(params)
   return new Promise(resolve => {
     resolve({
       data: [{
@@ -92,7 +93,7 @@ const columns = [
     { title: '操作', dataIndex: 'option', sortName: 'option', headerSort: true }]
 const tableFields = {
   border: true,
-  rowClassName,
+  rowClassName
 }
 const tableEvents = {
   selectionChange

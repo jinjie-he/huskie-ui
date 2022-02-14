@@ -1,6 +1,11 @@
 <template>
     <div class="h-table">
-        <h-query-filter :columns="columns" :size="tableFields?.size ? tableFields.size : 'default'">
+        <h-query-filter
+            :columns="columns"
+            :size="tableFields?.size ? tableFields.size : ''"
+            @reset="onReset"
+            @submit="onSubmit"
+        >
             <template #customSubmitBtn="{ formSearch }">
                 <slot name="customSubmitBtn" :formSearch="formSearch" />
             </template>
@@ -114,12 +119,11 @@ const _paginationFields = computed(() => {
     return { ...other }
 })
 const _data = reactive<{
-    dataSource: Array
+    dataSource: Array<any>
     total: number | string
     currentPage: number
     pageSize: number
 }>({ dataSource: [], total: 0, currentPage: 1, pageSize: 10 })
-const formSearch = reactive({})
 onMounted(() => {
     getRequestData({ currentPage: 1, pageSize: 10 })
 })
@@ -144,8 +148,11 @@ const handleCurrentChange = currentPage => {
     getRequestData({ pageSize: _data.pageSize, currentPage })
 }
 
-const onTest = () => {
-    console.log(formSearch)
+const onReset = () => {
+    getRequestData({ currentPage: 1, pageSize: 10 })
+}
+const onSubmit = formSearch => {
+    getRequestData({ currentPage: 1, pageSize: _data.pageSize, ...formSearch })
 }
 defineExpose({
     tableRef: table

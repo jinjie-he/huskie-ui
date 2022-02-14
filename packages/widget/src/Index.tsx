@@ -7,6 +7,10 @@ export const FormCol = defineComponent({
         span: {
             type: Number,
             default: 6
+        },
+        prop: {
+            type: String,
+            default: ''
         }
     },
     setup(props, { slots }) {
@@ -15,7 +19,9 @@ export const FormCol = defineComponent({
                 slots.label ? slots.label?.() : typeof props.label === 'string' ? props.label : props.label(),
             default: () => slots.default?.()
         }
-        return () => <ElCol span={props.span}>{{ default: () => <ElFormItem>{_slots}</ElFormItem> }}</ElCol>
+        return () => (
+            <ElCol span={props.span}>{{ default: () => <ElFormItem prop={props.prop}>{_slots}</ElFormItem> }}</ElCol>
+        )
     }
 })
 export const FormInput = defineComponent({
@@ -27,6 +33,10 @@ export const FormInput = defineComponent({
             default: 6
         },
         modelValue: {
+            type: String,
+            default: ''
+        },
+        prop: {
             type: String,
             default: ''
         }
@@ -44,7 +54,7 @@ export const FormInput = defineComponent({
                 />
             )
         }
-        return () => <FormCol>{_slots}</FormCol>
+        return () => <FormCol prop={props.prop}>{_slots}</FormCol>
     }
 })
 export const FormSelect = defineComponent({
@@ -56,6 +66,10 @@ export const FormSelect = defineComponent({
             default: 6
         },
         modelValue: [String, Number, Object],
+        prop: {
+            type: String,
+            default: ''
+        },
         request: {
             type: Function,
             default: () => {
@@ -127,6 +141,6 @@ export const FormSelect = defineComponent({
                 </ElSelect>
             )
         }
-        return () => <FormCol>{_slots}</FormCol>
+        return () => <FormCol prop={props.prop}>{_slots}</FormCol>
     }
 })

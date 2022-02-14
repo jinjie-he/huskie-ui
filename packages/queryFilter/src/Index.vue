@@ -1,5 +1,5 @@
 <template>
-    <el-form class="qf" :model="formSearch" :size="size" :label-width="100">
+    <el-form class="qf" ref="qf" :model="formSearch" :size="size" :label-width="100">
         <el-row>
             <component
                 v-for="column in searchColumn"
@@ -10,19 +10,20 @@
                 :placeholder="column.title"
                 :dataSource="column?.options ? column.options : []"
                 :request="column?.request ? column.request : null"
+                :prop="column.dataIndex"
                 v-bind="column.fieldProps"
             />
             <slot v-if="customSubmitBtn" name="customSubmitBtn" :formSearch="formSearch" />
-            <el-col v-else :span="6">
-                <el-button>重置</el-button>
-                <el-button type="primary">查询</el-button>
+            <el-col v-else :span="6" class="qf-btn-right" :class="{ 'qf-btn-small': size === 'small' }">
+                <el-button @click="onReset">重置</el-button>
+                <el-button @click="onSubmit" type="primary">查询</el-button>
             </el-col>
         </el-row>
     </el-form>
 </template>
 
 <script lang="ts" setup>
-import { defineProps, PropType, reactive, computed } from 'vue'
+import { defineProps, PropType, reactive, computed, ref, defineEmits } from 'vue'
 import { FormInput, FormSelect, FormCol } from '@huskie-ui/widget'
 import { ElForm, ElRow, ElButton, ElCol } from 'element-plus'
 interface Column {
@@ -34,7 +35,9 @@ interface Column {
     fieldProps?: any
     options?: Array<any>
 }
+const emit = defineEmits(['reset', 'submit'])
 const formSearch = reactive({})
+const qf = ref<HTMLElement>(null)
 const props = defineProps({
     columns: {
         type: Array as PropType<Array<Column>>,
@@ -64,8 +67,26 @@ const searchColumn = computed(() => {
             return { ...column, valueType }
         })
 })
+const onReset = () => {
+    qf.value?.resetFields()
+    emit('reset')
+}
+const onSubmit = () => {
+    qf.value.validate(valid => {
+        if (valid) {
+            emit('submit', formSearch)
+        }
+    })
+}
 </script>
 <style lang="scss" scoped>
 .qf {
+    &-btn-small {
+        margin-top: -1px;
+    }
+    &-btn-right {
+        text-align: right;
+        min-width: 132px;
+    }
 }
 </style>
