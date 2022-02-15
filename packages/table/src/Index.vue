@@ -5,6 +5,7 @@
             :size="tableFields?.size ? tableFields.size : ''"
             @reset="onReset"
             @submit="onSubmit"
+            :submitLoading="_data.loading"
         >
             <template #customSubmitBtn="{ formSearch }">
                 <slot name="customSubmitBtn" :formSearch="formSearch" />
@@ -13,6 +14,7 @@
         <el-table
             ref="table"
             :data="_data.dataSource.length > 0 ? _data.dataSource : dataSource"
+            v-loading="_data.loading"
             v-bind="tableFields"
             v-on="tableEvents"
         >
@@ -40,6 +42,7 @@
             @current-change="handleCurrentChange"
             :hide-on-single-page="_data.total <= 0"
             :total="_data.total"
+            :small="tableFields?.size === 'small' ? true : false"
             v-bind="_paginationFields"
         />
     </div>
@@ -48,7 +51,8 @@
 <script lang="ts" setup>
 import HQueryFilter from '@huskie-ui/queryFilter'
 import { defineProps, onMounted, PropType, reactive, defineExpose, ref, computed } from 'vue'
-import { ElTable, ElTableColumn, ElButton, ElPagination, ElForm, ElFormItem } from 'element-plus'
+import { ElTable, ElTableColumn, ElButton, ElPagination, ElForm, ElFormItem, ElLoading } from 'element-plus'
+const vLoading = ElLoading.directive
 interface Column {
     title?: string
     request?: () => Promise<any>
@@ -123,18 +127,22 @@ const _data = reactive<{
     total: number | string
     currentPage: number
     pageSize: number
-}>({ dataSource: [], total: 0, currentPage: 1, pageSize: 10 })
+    loading: boolean
+}>({ dataSource: [], total: 0, currentPage: 1, pageSize: 10, loading: false })
 onMounted(() => {
     getRequestData({ currentPage: 1, pageSize: 10 })
 })
 const getRequestData = async params => {
+    _data.loading = true
     try {
         const { data, total, currentPage, pageSize } = await props.request(params)
         _data.dataSource = data
         _data.total = total || data.length
         _data.currentPage = currentPage || 1
         _data.pageSize = pageSize || 10
+        _data.loading = false
     } catch (e) {
+        _data.loading = false
         console.log(e)
     }
 }

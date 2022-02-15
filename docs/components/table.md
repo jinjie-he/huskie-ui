@@ -93,7 +93,8 @@ const columns = [
     { title: '操作', dataIndex: 'option', sortName: 'option', headerSort: true }]
 const tableFields = {
   border: true,
-  rowClassName
+  rowClassName,
+  size:'small'
 }
 const tableEvents = {
   selectionChange
