@@ -15,7 +15,12 @@
                 v-bind="column.fieldProps"
             />
             <slot v-if="customSubmitBtn" name="customSubmitBtn" :formSearch="formSearch" />
-            <el-col v-else :span="6" class="qf-btn-right" :class="{ 'qf-btn-small': size === 'small' }">
+            <el-col
+                v-else
+                :span="isExpand ? (4 - (searchColumn.length % 4)) * 6 : 6"
+                class="qf-btn-right"
+                :class="{ 'qf-btn-small': size === 'small' }"
+            >
                 <el-button @click="onReset">重置</el-button>
                 <el-button @click="onSubmit" type="primary" :loading="submitLoading">查询</el-button>
                 <el-button type="text" @click="onExpand" v-if="searchColumn.length > 2">
