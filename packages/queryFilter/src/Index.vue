@@ -2,7 +2,8 @@
     <el-form class="qf" ref="qf" :model="formSearch" :size="size" :label-width="100">
         <el-row>
             <component
-                v-for="column in searchColumn"
+                v-for="(column, index) in searchColumn"
+                v-show="index <= 2 || isExpand"
                 :key="column.dataIndex"
                 :is="column.valueType"
                 :label="column.title"
@@ -17,6 +18,12 @@
             <el-col v-else :span="6" class="qf-btn-right" :class="{ 'qf-btn-small': size === 'small' }">
                 <el-button @click="onReset">重置</el-button>
                 <el-button @click="onSubmit" type="primary" :loading="submitLoading">查询</el-button>
+                <el-button type="text" @click="onExpand" v-if="searchColumn.length > 2">
+                    <div>
+                        {{ isExpand ? '收起' : '展开' }}
+                        <el-icon><arrow-down :class="[isExpand ? 'icon-rotate' : 'icon-reset']" /></el-icon>
+                    </div>
+                </el-button>
             </el-col>
         </el-row>
     </el-form>
@@ -25,7 +32,9 @@
 <script lang="ts" setup>
 import { defineProps, PropType, reactive, computed, ref, defineEmits } from 'vue'
 import { FormInput, FormSelect, FormCol } from '@huskie-ui/widget'
-import { ElForm, ElRow, ElButton, ElCol } from 'element-plus'
+import { ElForm, ElRow, ElButton, ElCol, ElIcon } from 'element-plus'
+import { ArrowDown } from '@element-plus/icons-vue'
+
 interface Column {
     title?: string
     request?: () => Promise<any>
@@ -38,6 +47,7 @@ interface Column {
 const emit = defineEmits(['reset', 'submit'])
 const formSearch = reactive({})
 const qf = ref<HTMLElement>(null)
+const isExpand = ref<boolean>(false)
 const props = defineProps({
     columns: {
         type: Array as PropType<Array<Column>>,
@@ -82,6 +92,9 @@ const onSubmit = () => {
         }
     })
 }
+const onExpand = () => {
+    isExpand.value = !isExpand.value
+}
 </script>
 <style lang="scss" scoped>
 .qf {
@@ -91,6 +104,16 @@ const onSubmit = () => {
     &-btn-right {
         text-align: right;
         min-width: 132px;
+    }
+    .icon-rotate {
+        transform: rotate(180deg);
+        -webkit-transform: rotate(180deg);
+        transition: transform 0.5s;
+    }
+    .icon-reset {
+        transform: rotate(0deg);
+        -webkit-transform: rotate(0deg);
+        transition: transform 0.5s;
     }
 }
 </style>

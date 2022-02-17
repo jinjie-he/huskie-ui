@@ -11,27 +11,31 @@ desc: 'desc'
 
 <template>
   <h-table
-    ref="table"
+    ref='table'
     :request='getTableData'
     :columns='columns'
     :tableFields='tableFields'
     :tableEvents='tableEvents'>
+    <template #toolBar>
+      <a>添加</a>
+    </template>
     <template #headerOption='{ column }'>
       {{column.label}}
     </template>
     <template #option='{ row }'>
       <div>
-        <a  @click='getTable'>删除</a>
-        <a  @click='onOption(row)'>添加</a>
+        <a @click='getTable'>删除</a>
+        <a @click='onOption(row)'>添加</a>
       </div>
     </template>
   </h-table>
 </template>
 <script lang='ts' setup>
-import {ref} from 'vue'
+import { ref } from 'vue'
+
 const table = ref<HTMLElement>(null)
 const getTableData = (params) => {
-    console.log(params)
+  console.log(params)
   return new Promise(resolve => {
     resolve({
       data: [{
@@ -70,7 +74,7 @@ const rowClassName = ({ row, rowIndex }) => {
   }
   return ''
 }
-const getTable = () =>{
+const getTable = () => {
   table.value.tableRef?.toggleAllSelection()
 }
 const selectionChange = (val) => {
@@ -87,14 +91,21 @@ const getRequest = async () => {
   }
 }
 const columns = [
-    { columnFields: { type: 'selection', width: 55 } },
-    { title: '姓名', dataIndex: 'name' ,search:true,valueType:'select',request:getRequest,fieldProps:{placeholder:'我是测试数据'}},
-    { title: '年龄', dataIndex: 'age' }, { title: '性别', dataIndex: 'sex',search:true},
-    { title: '操作', dataIndex: 'option', sortName: 'option', headerSort: true }]
+  { columnFields: { type: 'selection', width: 55 } },
+  {
+    title: '姓名',
+    dataIndex: 'name',
+    search: true,
+    valueType: 'select',
+    request: getRequest,
+    fieldProps: { placeholder: '我是测试数据' }
+  },
+  { title: '年龄', dataIndex: 'age',search: true}, { title: '性别', dataIndex: 'sex', search: true },
+  { title: '年龄1', dataIndex: 'age',search: true }, { title: '爱好', dataIndex: 'like', search: true },
+  { title: '操作', dataIndex: 'option', sortName: 'option', headerSort: true }]
 const tableFields = {
   border: true,
-  rowClassName,
-  size:'small'
+  rowClassName
 }
 const tableEvents = {
   selectionChange

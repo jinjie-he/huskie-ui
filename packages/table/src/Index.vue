@@ -11,6 +11,9 @@
                 <slot name="customSubmitBtn" :formSearch="formSearch" />
             </template>
         </h-query-filter>
+        <div class="h-table-tb">
+            <slot name="toolBar" />
+        </div>
         <el-table
             ref="table"
             :data="_data.dataSource.length > 0 ? _data.dataSource : dataSource"
@@ -181,7 +184,12 @@ defineExpose({
 }
 </style>
 <style lang="scss" scoped>
-.h-table-pagination {
-    margin-top: 12px;
+.h-table {
+    &-tb {
+        padding: 8px;
+    }
+    &-pagination {
+        margin-top: 12px;
+    }
 }
 </style>
