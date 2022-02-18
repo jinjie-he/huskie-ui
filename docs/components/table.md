@@ -35,7 +35,6 @@ import { ref } from 'vue'
 
 const table = ref<HTMLElement>(null)
 const getTableData = (params) => {
-  console.log(params)
   return new Promise(resolve => {
     resolve({
       data: [{
