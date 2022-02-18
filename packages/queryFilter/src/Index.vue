@@ -18,7 +18,7 @@
             />
             <slot v-if="customSubmitBtn" name="customSubmitBtn" :formSearch="formSearch" />
             <el-col
-                v-else
+                v-if="!customSubmitBtn && searchColumn.length > 0"
                 :span="isExpand ? (4 - (searchColumn.length % (24 / FormItemSpan))) * FormItemSpan : FormItemSpan"
                 class="qf-btn-right"
                 :class="{ 'qf-btn-small': size === 'small' }"
