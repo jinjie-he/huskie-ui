@@ -98,7 +98,7 @@ const columns = [
     search: true,
     valueType: 'select',
     request: getRequest,
-    fieldProps: { placeholder: '我是测试数据' }
+    fieldProps: { placeholder: '我是测试1数据',span:6 }
   },
   { title: '年龄', dataIndex: 'age',search: true}, { title: '性别', dataIndex: 'sex', search: true },
   { title: '年龄1', dataIndex: 'age',search: true }, { title: '爱好', dataIndex: 'like', search: true },

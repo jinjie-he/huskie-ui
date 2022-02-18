@@ -54,7 +54,11 @@ export const FormInput = defineComponent({
                 />
             )
         }
-        return () => <FormCol prop={props.prop}>{_slots}</FormCol>
+        return () => (
+            <FormCol prop={props.prop} span={props.span}>
+                {_slots}
+            </FormCol>
+        )
     }
 })
 export const FormSelect = defineComponent({
@@ -141,6 +145,10 @@ export const FormSelect = defineComponent({
                 </ElSelect>
             )
         }
-        return () => <FormCol prop={props.prop}>{_slots}</FormCol>
+        return () => (
+            <FormCol prop={props.prop} span={props.span}>
+                {_slots}
+            </FormCol>
+        )
     }
 })
