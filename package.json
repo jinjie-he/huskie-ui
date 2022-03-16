@@ -71,12 +71,12 @@
     "vuepress-vite": "^2.0.0-beta.25"
   },
   "license": "MIT",
-  "repository": "git@gitee.com:junjie826/huskie-ui.git",
+  "repository": "https://github.com/jinjie-he/huskie-ui.git",
   "scripts": {
     "build": "yarn dist && set NODE_ENV=production rollup -c",
     "build:watch": "rollup -c -w",
-    "docs:dev": "vuepress dev docs",
-    "docs:build": "set NODE_ENV=production && vuepress build docs",
+    "docs:dev": "vuepress dev vuepress",
+    "docs:build": "set NODE_ENV=production && vuepress build vuepress",
     "clean": "lerna clean",
     "dist": "rimraf ./packages/**/dist",
     "commit": "git-cz",

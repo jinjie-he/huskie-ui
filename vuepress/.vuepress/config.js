@@ -72,5 +72,5 @@ module.exports = {
     contributorsText: '贡献者',
   },
   plugins: ['demoblock-plus'],
-  dest:'./dist'
+  dest:'./docs'
 };
