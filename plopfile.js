@@ -49,13 +49,13 @@ module.exports = plop => {
             },
             {
                 type: 'append',
-                path: 'docs/.vuepress/clientAppEnhance.ts',
+                path: 'vuepress/.vuepress/clientAppEnhance.ts',
                 pattern: /(\/\/ -- APPSTART ITEMS HERE --)/gi,
                 template: "import H{{hump name}} from '@huskie-ui/{{name}}'"
             },
             {
                 type: 'append',
-                path: 'docs/.vuepress/clientAppEnhance.ts',
+                path: 'vuepress/.vuepress/clientAppEnhance.ts',
                 pattern: /(\/\/ -- APPEND ITEMS HERE --)/gi,
                 template: "app.component('H{{hump name}}', H{{hump name}})"
             }
