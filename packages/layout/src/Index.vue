@@ -7,8 +7,8 @@
             <el-col :span="6"><div class="grid-content bg-purple">sfsd</div></el-col>
         </el-row>
         我是测试代码
-        <el-radio v-model="radio" label="1">备选项</el-radio>
-        <el-radio v-model="radio" label="2">备选项</el-radio>
+        <el-radio v-model="radio" label="1">备选项1</el-radio>
+        <el-radio v-model="radio" label="2">备选项2</el-radio>
         <el-button>sdsdd</el-button>
         <p :class="test.text">{{ formData.mobile }}</p>
         <p :class="test.word">{{ formData.account }}</p>
