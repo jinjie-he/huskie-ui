@@ -71,5 +71,6 @@ module.exports = {
     lastUpdatedText: '上次更新',
     contributorsText: '贡献者',
   },
-  plugins: ['demoblock-plus']
+  plugins: ['demoblock-plus'],
+  dest:'./dist'
 };
