@@ -4,7 +4,7 @@ const alias = require('../../alias')
 module.exports = {
   title: "huskie-ui", // 顶部左侧标题
   description: 'Vue3 + ElementPlus 组件库',
-  base: '/huskie-ui/docs/',
+  base: '/huskie-ui/',
   bundler: '@vuepress/vite',
   alias,
   head: [
