@@ -1,0 +1,1 @@
+const e={key:"v-621628ba",path:"/guide/start.html",title:"开始",lang:"en-US",frontmatter:{title:"开始"},excerpt:"",headers:[{level:2,title:"安装",slug:"安装",children:[]},{level:2,title:"使用",slug:"使用",children:[]}],filePathRelative:"guide/start.md",git:{updatedTime:1647434532e3,contributors:[{name:"Junjie JJ He",email:"junjie.jj.he@cn.pwc.com",commits:1}]}};export{e as data};
