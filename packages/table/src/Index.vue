@@ -45,7 +45,7 @@
             @current-change="handleCurrentChange"
             :hide-on-single-page="_data.total <= 0"
             :total="_data.total"
-            :small="tableFields?.size === 'small' ? true : false"
+            :small="tableFields?.size === 'small'"
             v-bind="_paginationFields"
         />
     </div>
@@ -133,12 +133,13 @@ const _data = reactive<{
     loading: boolean
 }>({ dataSource: [], total: 0, currentPage: 1, pageSize: 10, loading: false })
 onMounted(() => {
-    getRequestData({ currentPage: 1, pageSize: 10 })
+    getRequestData({ currentPage: 1, pageSize: props.params?.pageSize || 10 })
+  console.log(table,'---')
 })
 const getRequestData = async params => {
     _data.loading = true
     try {
-        const { data, total, currentPage, pageSize } = await props.request(params)
+        const { data, total, currentPage, pageSize } = await props.request({ ...params, ...props.params })
         _data.dataSource = data
         _data.total = total || data.length
         _data.currentPage = currentPage || 1
@@ -160,7 +161,7 @@ const handleCurrentChange = currentPage => {
 }
 
 const onReset = () => {
-    getRequestData({ currentPage: 1, pageSize: 10 })
+    getRequestData({ currentPage: 1, pageSize: props.params?.pageSize || 10 })
 }
 const onSubmit = formSearch => {
     getRequestData({ currentPage: 1, pageSize: _data.pageSize, ...formSearch })
