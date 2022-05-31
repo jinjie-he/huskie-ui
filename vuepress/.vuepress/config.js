@@ -52,6 +52,7 @@ module.exports = {
           children: [
             { text: "Layout 布局", link: "/components/layout" },
             { text: "Table 表格", link: "/components/table" },
+            { text: "queryFilter 表单项", link: "/components/queryFilter" },
             { text: "View 试图", link: "/components/view" }
           ],
         },

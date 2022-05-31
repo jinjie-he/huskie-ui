@@ -1,5 +1,5 @@
 <template>
-    <el-form class="qf" ref="qf" :model="formSearch" :size="size" :label-width="100">
+    <el-form class="qf" ref="qf" :model="formSearch" :size="size" :label-width="labelWidth">
         <el-row>
             <slot v-if="searchColumn.length <= 0" name="customItems" :formSearch="formSearch" />
             <component
@@ -75,6 +75,10 @@ const props = defineProps({
     FormItemSpan: {
         type: Number,
         default: 6
+    },
+    labelWidth: {
+        type: Number,
+        default: 100
     }
 })
 const lowerToCapital = (valueType: string): string => {

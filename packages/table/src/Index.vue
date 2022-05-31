@@ -134,7 +134,6 @@ const _data = reactive<{
 }>({ dataSource: [], total: 0, currentPage: 1, pageSize: 10, loading: false })
 onMounted(() => {
     getRequestData({ currentPage: 1, pageSize: props.params?.pageSize || 10 })
-  console.log(table,'---')
 })
 const getRequestData = async params => {
     _data.loading = true
