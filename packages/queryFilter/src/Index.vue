@@ -1,10 +1,10 @@
 <template>
-    <el-form class="qf" ref="qf" :model="formSearch" :size="size" :label-width="labelWidth">
+    <el-form class="qf" ref="qf" :model="formSearch" :size="size" :label-width="labelWidth" v-bind="formFields">
         <el-row>
             <slot v-if="searchColumn.length <= 0" name="customItems" :formSearch="formSearch" />
             <component
                 v-for="(column, index) in searchColumn"
-                v-show="index <= 24 / FormItemSpan - 2 || isExpand"
+                v-show="customSubmitBtn || index <= 24 / formItemSpan - 2 || isExpand"
                 :key="column.dataIndex"
                 :is="column.valueType"
                 :label="column.title"
@@ -13,19 +13,19 @@
                 :dataSource="column?.options ? column.options : []"
                 :request="column?.request ? column.request : null"
                 :prop="column.dataIndex"
-                :span="column?.fieldProps?.span ? column.fieldProps['span'] : FormItemSpan"
+                :span="column?.fieldProps?.span ? column.fieldProps['span'] : formItemSpan"
                 v-bind="column.fieldProps"
             />
-            <slot v-if="customSubmitBtn" name="customSubmitBtn" :formSearch="formSearch" />
+            <slot v-if="customSubmitBtn" name="customSubmitBtn" :column="{ formSearch, onReset, onSubmit }" />
             <el-col
                 v-if="!customSubmitBtn && searchColumn.length > 0"
-                :span="isExpand ? (4 - (searchColumn.length % (24 / FormItemSpan))) * FormItemSpan : FormItemSpan"
+                :span="isExpand ? (4 - (searchColumn.length % (24 / formItemSpan))) * formItemSpan : formItemSpan"
                 class="qf-btn-right"
                 :class="{ 'qf-btn-small': size === 'small' }"
             >
                 <el-button @click="onReset">重置</el-button>
                 <el-button @click="onSubmit" type="primary" :loading="submitLoading">查询</el-button>
-                <el-button type="text" @click="onExpand" v-if="searchColumn.length > 24 / FormItemSpan - 2">
+                <el-button type="text" @click="onExpand" v-if="searchColumn.length > 24 / formItemSpan - 2">
                     <div>
                         {{ isExpand ? '收起' : '展开' }}
                         <el-icon><arrow-down :class="[isExpand ? 'icon-rotate' : 'icon-reset']" /></el-icon>
@@ -72,13 +72,19 @@ const props = defineProps({
         type: Boolean,
         default: false
     },
-    FormItemSpan: {
+    formItemSpan: {
         type: Number,
         default: 6
     },
     labelWidth: {
         type: Number,
         default: 100
+    },
+    formFields: {
+        type: Object,
+        default: () => {
+            return {}
+        }
     }
 })
 const lowerToCapital = (valueType: string): string => {
@@ -99,11 +105,11 @@ const searchColumn = computed(() => {
     )
 })
 const onReset = () => {
-    qf.value?.resetFields()
+    qf.value['resetFields']()
     emit('reset')
 }
 const onSubmit = () => {
-    qf.value.validate(valid => {
+    qf.value['validate'](valid => {
         if (valid) {
             emit('submit', formSearch)
         }

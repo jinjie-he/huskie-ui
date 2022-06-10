@@ -12,9 +12,18 @@ desc: 'desc'
    <h-query-filter
      :columns="_data.columns"
      :size="_data.size"
+     :customSubmitBtn='true'
+     :formFields='_data.formFields'
      @reset="onReset"
      @submit="onSubmit"
-   />
+   >
+     <template #customSubmitBtn='{column}'>
+       <div>
+         <a @click='column?.onReset'>重置</a>
+         <a @click='column?.onSubmit'>查询</a>
+       </div>
+     </template>
+   </h-query-filter>
 </template>
 
 <script lang="ts" setup>
@@ -37,16 +46,24 @@ const _data = reactive({
       search: true,
       valueType: 'select',
       request: getRequest,
-      fieldProps: { placeholder: '我是测试1数据', span: 6 }
+      fieldProps: { placeholder: '我是测试1数据', span: 12 }
     },
-    { title: '性别', dataIndex: 'sex', search: true }, { title: '年龄1', dataIndex: 'age', search: true }, { title: '爱好', dataIndex: 'like', search: true }],
-  size:'default'
+    { title: '性别', dataIndex: 'sex', search: true }, { title: '年龄1', dataIndex: 'age', search: true }, { title: '爱好', dataIndex: 'like', search: true },{ title: '商品', dataIndex: 'goods', search: true }],
+  size:'default',
+  formFields:{
+    rules:{
+      sex: [
+        { required: true, message: 'Please input Activity name', trigger: 'blur' },
+        { min: 3, max: 5, message: 'Length should be 3 to 5', trigger: 'blur' },
+      ],
+    }
+  }
 })
 const onReset = () =>{
 
 }
 const onSubmit = () =>{
-
+  console.log('-----')
 }
 </script>
 
